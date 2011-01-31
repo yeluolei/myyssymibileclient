@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView
+		android:id="@+id/toptentext"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</TextView>
+	<ListView android:id="@+id/toptenlist"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	</ListView>
+	<Button
+		android:id="@+id/gettopten"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="连接">
+	</Button>
+</LinearLayout>

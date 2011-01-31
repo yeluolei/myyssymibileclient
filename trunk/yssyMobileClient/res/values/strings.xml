@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="hello">this is my first android application</string>
+    <string name="app_name">YSSY</string>
+    <string name="us">xiana</string>
+    <string name="pwd">10061216yll</string>
+    
+    
+    <string name="write">#ffffff</string>
+    <string name="black">#000000</string>
+</resources>
