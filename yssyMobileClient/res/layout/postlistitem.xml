@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="?android:attr/listPreferredItemHeight">
+	<TextView
+		android:id="@+id/posttype"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_alignParentTop="true"
+		android:textSize="18px" />
+	<TextView
+		android:id="@+id/postindex"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_alignParentTop="true"
+		android:layout_toRightOf="@+id/posttype"
+		android:adjustViewBounds="true"
+		android:textSize="18px"
+		android:padding="2dip" />
+	<TextView
+		android:id="@+id/posttitle"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_alignParentTop="true"
+		android:layout_toRightOf="@+id/postindex"
+		android:adjustViewBounds="true"
+		android:textSize="18px"
+		android:padding="2dip" />
+	<TextView
+		android:id="@+id/posttime"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:ellipsize="marquee"
+		android:textSize="14px"
+		android:paddingLeft="2dip" />
+	<TextView
+		android:id="@+id/postauthorid"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_alignWithParentIfMissing="true"
+		android:gravity="center_vertical"
+		android:textSize="14px"
+		android:paddingRight="8dip" />
+</RelativeLayout>
+

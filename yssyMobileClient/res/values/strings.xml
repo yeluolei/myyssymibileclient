@@ -5,7 +5,10 @@
     <string name="us">xiana</string>
     <string name="pwd">10061216yll</string>
     
-    
+    <string name="home">Home</string>
+    <string name="publish">Publish</string>
+    <string name="change">Change</string>
+    <string name="more">more</string>
     <string name="write">#ffffff</string>
     <string name="black">#000000</string>
 </resources>

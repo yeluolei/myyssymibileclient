@@ -20,6 +20,7 @@
 
 		<activity
 			android:name="TopTenActivity"></activity>
+		<activity android:name="postListActivity"></activity>
 
 	</application>
 	<uses-permission

@@ -33,6 +33,7 @@ public class yssy extends Activity {
 	private Button loginbutton;
 	private EditText username;
 	private EditText passwd;
+	private Button popmusicButton;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -45,12 +46,26 @@ public class yssy extends Activity {
 		loginbutton = (Button)findViewById(R.id.Button01);
 		username = (EditText)findViewById(R.id.EditText01);
 		passwd = (EditText)findViewById(R.id.EditText02);
-
+		popmusicButton = (Button)findViewById(R.id.popmusic);
 		//控件的控制逻辑在这里定义
 		//把逻辑new在外面，方便阅读
 		connectButton.setOnClickListener(connect);
 		loginbutton.setOnClickListener(login);
+		
+		popmusicButton.setOnClickListener(popmusic);
 	}
+	
+	private Button.OnClickListener popmusic = new Button.OnClickListener() {
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(yssy.this, postListActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("url","http://bbs.sjtu.edu.cn/bbswapdoc?board=PopMusic");
+			intent.putExtras(bundle);
+			startActivity(intent);
+			yssy.this.finish();
+		}
+	};
 	
 	//这里加点注释吧
 	//connect按钮的控制逻辑
