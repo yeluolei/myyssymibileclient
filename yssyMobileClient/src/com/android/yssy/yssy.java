@@ -12,12 +12,15 @@ import java.util.List;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,6 +37,7 @@ public class yssy extends Activity {
 	private EditText username;
 	private EditText passwd;
 	private Button popmusicButton;
+	private Button topicmodeButton;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -47,13 +51,28 @@ public class yssy extends Activity {
 		username = (EditText)findViewById(R.id.EditText01);
 		passwd = (EditText)findViewById(R.id.EditText02);
 		popmusicButton = (Button)findViewById(R.id.popmusic);
+		topicmodeButton = (Button)findViewById(R.id.topicmode);
 		//控件的控制逻辑在这里定义
 		//把逻辑new在外面，方便阅读
 		connectButton.setOnClickListener(connect);
 		loginbutton.setOnClickListener(login);
 		
+		
 		popmusicButton.setOnClickListener(popmusic);
+		topicmodeButton.setOnClickListener(topic);
 	}
+	
+	private Button.OnClickListener topic = new Button.OnClickListener() {
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(yssy.this,TopicPostListActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("url","http://bbs.sjtu.edu.cn/bbswaptdoc,board,PopMusic.html");
+			intent.putExtras(bundle);
+			startActivity(intent);
+			yssy.this.finish();
+		}
+	};
 	
 	private Button.OnClickListener popmusic = new Button.OnClickListener() {
 		public void onClick(View v) {
@@ -81,29 +100,60 @@ public class yssy extends Activity {
 	private Button.OnClickListener login = new Button.OnClickListener(){
 		public void onClick(View v){
 			try{  
-				String uriAPI = "http://bbs.sjtu.edu.cn/bbswaplogin";   
-				HttpPost httpRequest = new HttpPost(uriAPI);
-				DefaultHttpClient httpclient = new DefaultHttpClient(); 
 				List <NameValuePair> params = new ArrayList <NameValuePair>();   
 				params.add(new BasicNameValuePair("id", username.getText().toString()));   
 				params.add(new BasicNameValuePair("pw", passwd.getText().toString())); 
+				String sourceString = Net.getInstance().post("http://bbs.sjtu.edu.cn/bbswaplogin", params);
 
-				/* 添加请求参数到请求对象*/  
-				httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));   
-				/*发送请求并等待响应*/  
-				HttpResponse httpResponse = httpclient.execute(httpRequest);   
-				/*若状态码为200 ok*/  
-				if(httpResponse.getStatusLine().getStatusCode() == 200)    
-				{   
-					/*读返回数据*/  
-					String strResult = EntityUtils.toString(httpResponse.getEntity());
-					String newString = new String(strResult.getBytes(), "UTF-8");
-					tView.setText(newString);
-				}   
-				else   
-				{   
-					tView.setText("Error Response: "+httpResponse.getStatusLine().toString());   
-				}   
+				tView.setText(sourceString);
+//				DefaultHttpClient httpclient = new DefaultHttpClient();
+//				
+//				String uriAPI = "http://bbs.sjtu.edu.cn/bbswaplogin";   
+//				HttpPost httpRequest = new HttpPost(uriAPI);
+//				 
+//				List <NameValuePair> params = new ArrayList <NameValuePair>();   
+//				params.add(new BasicNameValuePair("id", username.getText().toString()));   
+//				params.add(new BasicNameValuePair("pw", passwd.getText().toString())); 
+//
+//				/* 添加请求参数到请求对象*/  
+//				httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));   
+//				/*发送请求并等待响应*/  
+//				HttpResponse httpResponse = httpclient.execute(httpRequest);   
+//				/*若状态码为200 ok*/  
+//				if(httpResponse.getStatusLine().getStatusCode() == 200)    
+//				{   
+//					
+//					List<Cookie> cookies = httpclient.getCookieStore().getCookies();  
+//			        if (cookies.isEmpty()) {  
+//			            tView.setText("None");  
+//			        } else {  
+//			        	String allString="";
+//			            for (int i = 0; i < cookies.size(); i++) {  
+//			                allString+=cookies.get(i).toString();  
+//			            }  
+//			            tView.setText(allString);
+//			            
+//			            
+//			            String mesguri = "http://bbs.sjtu.edu.cn/bbswappst?board=love&file=M.1297016948.A";
+//			            HttpGet httpget= new HttpGet(mesguri);
+//			            
+//			            
+//			            HttpResponse r = httpclient.execute(httpget);
+//			            
+//			            if (r.getStatusLine().getStatusCode()== 200)
+//			            {
+//							String strResult = EntityUtils.toString(r.getEntity());
+//							String newString = new String(strResult.getBytes(), "UTF-8");
+//							tView.setText(newString);
+//			            }
+//			     
+//			        }
+//					/*读返回数据*/  
+//				}   
+//				else   
+//				{   
+//					tView.setText("Error Response: "+httpResponse.getStatusLine().toString());   
+//				}   
 			}   
 			catch (Exception e) {
 				tView.setText(e.getMessage().toString());   
@@ -169,3 +219,6 @@ public class yssy extends Activity {
 	//	        e.printStackTrace();
 	//	    }
 	//	   }
+
+
+

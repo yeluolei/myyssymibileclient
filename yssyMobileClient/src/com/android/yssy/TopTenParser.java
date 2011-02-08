@@ -16,7 +16,7 @@ public class TopTenParser  {
 	public List<Map<String, String>> Parser() {
         List<Map<String, String>> PostItems = new ArrayList<Map<String, String>>();
         try{
-            String sourceString = StreamLoader.getInstance().load("http://bbs.sjtu.edu.cn/file/bbs/mobile/top100.html");
+            String sourceString = Net.getInstance().get("http://bbs.sjtu.edu.cn/file/bbs/mobile/top100.html");
     		int pastpos;
     		int prepos = 0;
     		for(int i= 0;i<10;i++)
