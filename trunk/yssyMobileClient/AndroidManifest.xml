@@ -21,6 +21,7 @@
 		<activity
 			android:name="TopTenActivity"></activity>
 		<activity android:name="postListActivity"></activity>
+		<activity android:name="TopicPostListActivity"></activity>
 
 	</application>
 	<uses-permission

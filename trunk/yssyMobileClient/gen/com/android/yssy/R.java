@@ -24,29 +24,30 @@ public final class R {
         public static final int tab_two_highlight=0x7f02000a;
     }
     public static final class id {
-        public static final int Button01=0x7f050009;
-        public static final int EditText01=0x7f050007;
-        public static final int EditText02=0x7f050008;
-        public static final int TextView=0x7f050005;
+        public static final int Button01=0x7f05000a;
+        public static final int EditText01=0x7f050008;
+        public static final int EditText02=0x7f050009;
+        public static final int ScrollView=0x7f050005;
+        public static final int TextView=0x7f050006;
         public static final int activitytitle=0x7f050004;
-        public static final int authorid=0x7f050016;
-        public static final int board=0x7f050015;
-        public static final int connect=0x7f050006;
-        public static final int gettopten=0x7f050013;
+        public static final int authorid=0x7f050017;
+        public static final int board=0x7f050016;
+        public static final int connect=0x7f050007;
+        public static final int gettopten=0x7f050014;
         public static final int more=0x7f050003;
         public static final int nextpage=0x7f050001;
-        public static final int popmusic=0x7f05000a;
-        public static final int postauthorid=0x7f050010;
-        public static final int postindex=0x7f05000d;
-        public static final int postlist=0x7f05000b;
-        public static final int posttime=0x7f05000f;
-        public static final int posttitle=0x7f05000e;
-        public static final int posttype=0x7f05000c;
+        public static final int popmusic=0x7f05000b;
+        public static final int postauthorid=0x7f050011;
+        public static final int postindex=0x7f05000e;
+        public static final int postlist=0x7f05000c;
+        public static final int posttime=0x7f050010;
+        public static final int posttitle=0x7f05000f;
+        public static final int posttype=0x7f05000d;
         public static final int prepage=0x7f050000;
-        public static final int title=0x7f050014;
+        public static final int title=0x7f050015;
         public static final int topicmode=0x7f050002;
-        public static final int toptenlist=0x7f050012;
-        public static final int toptentext=0x7f050011;
+        public static final int toptenlist=0x7f050013;
+        public static final int toptentext=0x7f050012;
     }
     public static final class layout {
         public static final int foot=0x7f030000;

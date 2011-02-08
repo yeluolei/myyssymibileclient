@@ -4,11 +4,17 @@
 	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	<include layout = "@layout/head"></include>
-	<LinearLayout
-		android:orientation="vertical"
+
+	<ScrollView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/ScrollView"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
+		android:layout_height="wrap_content">
+		<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
 		<TextView
 			android:text="@string/hello"
 			android:id="@+id/TextView"
@@ -45,6 +51,13 @@
 			android:layout_height="wrap_content"
 			android:text="PopMusic">
 		</Button>
-	</LinearLayout>
+				<Button
+			android:id="@+id/topicmode"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="topicmode">
+		</Button>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>
 

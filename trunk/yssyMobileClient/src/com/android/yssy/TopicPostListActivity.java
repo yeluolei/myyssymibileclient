@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class postListActivity extends Activity{
+public class TopicPostListActivity extends Activity{
 	private ListView postlistview;
 	private LinearLayout nextpage,prepage,topicmode,more;
 	
@@ -24,10 +24,8 @@ public class postListActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
-		Log.v("进入", "post");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.postlist);
-		
 		postlistview = (ListView)findViewById(R.id.postlist);
 		nextpage = (LinearLayout)findViewById(R.id.nextpage);
 		prepage = (LinearLayout)findViewById(R.id.prepage);
@@ -46,7 +44,7 @@ public class postListActivity extends Activity{
 		nextlink = "";
 		prase(URL);
 		
-		SimpleAdapter adapter = new SimpleAdapter(postListActivity.this,postItems,
+		SimpleAdapter adapter = new SimpleAdapter(TopicPostListActivity.this,postItems,
 				R.layout.postlistitem,
 				new String[]{"PostIndex","type","title","authorID","postTime"},
 				new int[] {R.id.postindex,R.id.posttype,R.id.posttitle,R.id.postauthorid,R.id.posttime});
@@ -61,9 +59,8 @@ public class postListActivity extends Activity{
 		int pastpos1,pastpos2;
 		int prepos = 0;
 		
-		// 获得板主名单
-		pastpos1 = sourceString.indexOf("<hr>",prepos);
-		pastpos2 = sourceString.indexOf("</br>",pastpos1);
+		pastpos1 = sourceString.indexOf("</br>",prepos);
+		pastpos2 = sourceString.indexOf("</br>",pastpos1+5);
 		while((pastpos1 = sourceString.indexOf("<a",pastpos1))<pastpos2) 
 		{
 			prepos = sourceString.indexOf(">",pastpos1)+1;
@@ -71,14 +68,14 @@ public class postListActivity extends Activity{
 			BoardMasters.add(sourceString.substring(prepos,pastpos1));
 		}
 		
-		// 获得上一页和下一页
+		
 		pastpos1 = pastpos2;
-		pastpos2 = sourceString.indexOf("<i",pastpos2);
+		pastpos2 = sourceString.indexOf("<br>",pastpos2);
 		while((pastpos1 = sourceString.indexOf("<a",pastpos1))<pastpos2) 
 		{
 			prepos = sourceString.indexOf("href=",pastpos1)+5;
 			pastpos1 = sourceString.indexOf(">",prepos);
-			if (sourceString.substring(pastpos1+1, sourceString.indexOf("</",pastpos1))== "上一页")
+			if ( sourceString.substring(pastpos1+1, sourceString.indexOf("</",pastpos1)).equals("上一页"))
 			{
 				prelink = sourceString.substring(prepos,pastpos1);
 			}
@@ -88,9 +85,8 @@ public class postListActivity extends Activity{
 			}
 		}
 		
-		// 获得文章列表
 		prepos = sourceString.indexOf("<hr>",pastpos2)+4;
-		pastpos2 = sourceString.indexOf("<hr/>",prepos);
+		pastpos2 = sourceString.indexOf("</table>",prepos);
 		
 		while(prepos < pastpos2) 
 		{
@@ -112,7 +108,6 @@ public class postListActivity extends Activity{
 			pastpos1 = sourceString.indexOf("</",prepos);
 			map.put("authorID",sourceString.substring(prepos,pastpos1));
 			
-			
 			prepos = pastpos1 + 4;
 			pastpos1 = sourceString.indexOf("</br>",prepos);
 			String postTime = sourceString.substring(prepos,pastpos1);
@@ -123,17 +118,11 @@ public class postListActivity extends Activity{
 			pastpos1 = sourceString.indexOf(">",prepos);
 			map.put("Link",sourceString.substring(prepos,pastpos1));
 			
-			
 			prepos = pastpos1+1;
 			pastpos1 = sourceString.indexOf("<",prepos);
 			String title = sourceString.substring(prepos,pastpos1);
 			String type;
-			if (title.startsWith("Re:")) 
-			{
-				title = title.substring(4);
-				type = "re";
-			}
-			else if (title.startsWith("○")) 
+			if (title.startsWith("○")) 
 			{
 				title = title.substring(1).trim();
 				type = "new";
@@ -149,7 +138,8 @@ public class postListActivity extends Activity{
 			
 			prepos = sourceString.indexOf("<p>",pastpos1)+3;
 		}
-		}catch (Exception e) {
+		}catch(Exception e) 
+		{
 			Log.v("postlistview", e.getMessage());
 		}
 	}
