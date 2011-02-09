@@ -38,6 +38,8 @@ public class yssy extends Activity {
 	private EditText passwd;
 	private Button popmusicButton;
 	private Button topicmodeButton;
+	private Button thememode;
+	private Button replyButton;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -52,11 +54,15 @@ public class yssy extends Activity {
 		passwd = (EditText)findViewById(R.id.EditText02);
 		popmusicButton = (Button)findViewById(R.id.popmusic);
 		topicmodeButton = (Button)findViewById(R.id.topicmode);
+		thememode = (Button)findViewById(R.id.theme);
+		replyButton = (Button)findViewById(R.id.btreply);
+		
 		//控件的控制逻辑在这里定义
 		//把逻辑new在外面，方便阅读
 		connectButton.setOnClickListener(connect);
 		loginbutton.setOnClickListener(login);
-		
+		thememode.setOnClickListener(themelisten);
+		replyButton.setOnClickListener(replylisten);
 		
 		popmusicButton.setOnClickListener(popmusic);
 		topicmodeButton.setOnClickListener(topic);
@@ -92,6 +98,24 @@ public class yssy extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent();
 			intent.setClass(yssy.this, TopTenActivity.class);
+			startActivity(intent);
+			yssy.this.finish();
+		}
+	};
+	
+	private Button.OnClickListener themelisten = new Button.OnClickListener(){
+		public void onClick(View v){
+			Intent intent = new Intent();
+			intent.setClass(yssy.this, ThemeArticleActivity.class);
+			startActivity(intent);
+			yssy.this.finish();
+		}
+	};
+	
+	private Button.OnClickListener replylisten = new Button.OnClickListener(){
+		public void onClick(View v){
+			Intent intent = new Intent();
+			intent.setClass(yssy.this, ReplyActivity.class);
 			startActivity(intent);
 			yssy.this.finish();
 		}
