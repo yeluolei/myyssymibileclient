@@ -25,29 +25,44 @@ public final class R {
     }
     public static final class id {
         public static final int Button01=0x7f05000a;
+        public static final int Content=0x7f050020;
         public static final int EditText01=0x7f050008;
         public static final int EditText02=0x7f050009;
+        public static final int LinearLayout01=0x7f050016;
+        public static final int LinearLayout02=0x7f050015;
         public static final int ScrollView=0x7f050005;
+        public static final int ScrollView01=0x7f050014;
         public static final int TextView=0x7f050006;
+        public static final int TextView01=0x7f050017;
+        public static final int TextView02=0x7f050019;
+        public static final int TextView03=0x7f05001f;
         public static final int activitytitle=0x7f050004;
-        public static final int authorid=0x7f050017;
-        public static final int board=0x7f050016;
+        public static final int articlelist=0x7f05001c;
+        public static final int author=0x7f05001d;
+        public static final int authorid=0x7f050026;
+        public static final int board=0x7f050025;
+        public static final int btreply=0x7f05000c;
         public static final int connect=0x7f050007;
-        public static final int gettopten=0x7f050014;
+        public static final int gettopten=0x7f050023;
         public static final int more=0x7f050003;
         public static final int nextpage=0x7f050001;
         public static final int popmusic=0x7f05000b;
-        public static final int postauthorid=0x7f050011;
-        public static final int postindex=0x7f05000e;
-        public static final int postlist=0x7f05000c;
-        public static final int posttime=0x7f050010;
-        public static final int posttitle=0x7f05000f;
-        public static final int posttype=0x7f05000d;
+        public static final int postauthorid=0x7f050013;
+        public static final int postindex=0x7f050010;
+        public static final int postlist=0x7f05000e;
+        public static final int posttime=0x7f050012;
+        public static final int posttitle=0x7f050011;
+        public static final int posttype=0x7f05000f;
         public static final int prepage=0x7f050000;
-        public static final int title=0x7f050015;
+        public static final int replaytitle=0x7f050018;
+        public static final int replycontent=0x7f05001a;
+        public static final int replysubmit=0x7f05001b;
+        public static final int theme=0x7f05000d;
+        public static final int time=0x7f05001e;
+        public static final int title=0x7f050024;
         public static final int topicmode=0x7f050002;
-        public static final int toptenlist=0x7f050013;
-        public static final int toptentext=0x7f050012;
+        public static final int toptenlist=0x7f050022;
+        public static final int toptentext=0x7f050021;
     }
     public static final class layout {
         public static final int foot=0x7f030000;
@@ -55,8 +70,11 @@ public final class R {
         public static final int main=0x7f030002;
         public static final int postlist=0x7f030003;
         public static final int postlistitem=0x7f030004;
-        public static final int topten=0x7f030005;
-        public static final int toptenlistitem=0x7f030006;
+        public static final int reply=0x7f030005;
+        public static final int themearticle=0x7f030006;
+        public static final int themearticlelistitem=0x7f030007;
+        public static final int topten=0x7f030008;
+        public static final int toptenlistitem=0x7f030009;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

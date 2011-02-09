@@ -51,13 +51,19 @@
 			android:layout_height="wrap_content"
 			android:text="PopMusic">
 		</Button>
-				<Button
+		<Button
 			android:id="@+id/topicmode"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="topicmode">
 		</Button>
-		</LinearLayout>
+		<Button android:text="reply" android:id="@+id/btreply" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+		<Button android:text="theme" 
+			android:id="@+id/theme" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"></Button>
+		
+</LinearLayout>
 	</ScrollView>
 </LinearLayout>
 
