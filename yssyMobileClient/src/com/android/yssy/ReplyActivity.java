@@ -1,5 +1,7 @@
 package com.android.yssy;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class ReplyActivity extends Activity {
 	EditText replyTitle;
 	Button submit;
 	
+	String urlSource = "http://bbs.sjtu.edu.cn/bbswappst?board=love&file=M.1297309753.A";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -32,7 +36,7 @@ public class ReplyActivity extends Activity {
 		submit.setOnClickListener(submitListener);
 		
 		try {
-			String source = Net.getInstance().get("http://bbs.sjtu.edu.cn/bbswappst?board=SJTUNews&file=M.1297238966.A");
+			String source = Net.getInstance().get(urlSource);
 			ReplyParser parser = new ReplyParser(source);
 			String temp = parser.GetTitle();
 			replyTitle.setText(temp);
@@ -45,12 +49,17 @@ public class ReplyActivity extends Activity {
 	
 	private Button.OnClickListener submitListener = new Button.OnClickListener() {
 		public void onClick(View v) {
+
+			String board = GetUrlParams("board");
+			String file = GetUrlParams("file");
+			String reidstr = file.substring(2, file.length()-2);
+			
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add( new BasicNameValuePair("title",replyTitle.getText().toString()));
 			params.add( new BasicNameValuePair("text",replyContent.getText().toString()));
-			params.add( new BasicNameValuePair("board","SJTUNews"));
-			params.add( new BasicNameValuePair("file","M.1297238966.A"));
-			params.add( new BasicNameValuePair("reidstr","1297238966"));
+			params.add( new BasicNameValuePair("board",board));
+			params.add( new BasicNameValuePair("file",file));
+			params.add( new BasicNameValuePair("reidstr",reidstr));
 			params.add( new BasicNameValuePair("signature","1"));
 			params.add( new BasicNameValuePair("autocr","1"));
 			params.add( new BasicNameValuePair("live","180"));
@@ -69,4 +78,18 @@ public class ReplyActivity extends Activity {
 		}
 	};
 	
+	private String GetUrlParams(String name){
+		int headpos = 0;
+		int tailpos = 0;
+		String result;
+		tailpos = urlSource.indexOf("?",tailpos);
+		tailpos = urlSource.indexOf(name + "=",tailpos);
+		headpos = tailpos + name.length() + 1;
+		if( (tailpos = urlSource.indexOf("&",headpos)) == -1){
+			result = urlSource.substring(headpos);
+		}
+		else
+			result = urlSource.substring(headpos,tailpos);
+		return result;
+	}
 }
