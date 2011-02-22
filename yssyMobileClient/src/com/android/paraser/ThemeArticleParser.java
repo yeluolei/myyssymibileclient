@@ -63,11 +63,24 @@ public class ThemeArticleParser {
 		}
 		
 		String time = articleString.substring(headpos, tailpos);
-		
+		headpos = tailpos;
+		tailpos = articleString.indexOf("<font color=\"808080\">",headpos);
+		if(tailpos == -1) {
+			tailpos = articleString.length();
+		}
+		else{
+			for(int i = 0; i < 4; ++i){
+				tailpos = articleString.indexOf("\n",headpos);
+				if(tailpos == -1){
+					tailpos = articleString.length();
+					break;
+				}
+			}
+		}
 		//articleString = articleString.substring(tailpos);
 		result.put("time", time);
 		result.put("author", author);
-		result.put("content", Html.fromHtml( articleString.substring(tailpos).replace("\n", "<br>")));
+		result.put("content", Html.fromHtml( articleString.substring(headpos,tailpos).replace("\n", "<br>")));
 		return result;
 	}
 }

@@ -62,7 +62,7 @@ public class PostListParser implements PostParser{
 			prepos = sourceString.indexOf("<hr>",pastpos2)+4;
 			pastpos2 = sourceString.indexOf("<hr/>",prepos);
 			
-			while(prepos < pastpos2) 
+			while(prepos <= pastpos2) 
 			{
 				Map<String, Object> map = new HashMap<String, Object>();
 				pastpos1 = sourceString.indexOf("<a",prepos);
@@ -95,7 +95,7 @@ public class PostListParser implements PostParser{
 				
 				
 				prepos = pastpos1+1;
-				pastpos1 = sourceString.indexOf("<",prepos);
+				pastpos1 = sourceString.indexOf("</a>",prepos);
 				String title = sourceString.substring(prepos,pastpos1);
 				int type;
 				if (title.startsWith("Re:")) 
