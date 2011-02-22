@@ -75,6 +75,7 @@ public class Net {
 			BufferedReader inbuff = new BufferedReader(new InputStreamReader(in,"GB2312"));
 			String line = "";
 			while ((line = inbuff.readLine()) != null){
+				resultString.append('\n');
 				resultString.append(line);
 			}
 
