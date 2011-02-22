@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="waittingProgressStyle" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminateDrawable">@anim/wait</item>
+    </style>
+    <style name="Theme.NoBackground" parent="android:Theme.NoTitleBar"> 
+        <item name="android:windowBackground">@null</item> 
+    </style> 
+</resources>

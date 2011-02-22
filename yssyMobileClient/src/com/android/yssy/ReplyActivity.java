@@ -1,46 +1,45 @@
 package com.android.yssy;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.paraser.ReplyParser;
+import com.android.utli.Net;
+
 public class ReplyActivity extends Activity {
 
-	EditText replyContent;
-	EditText replyTitle;
-	Button submit;
+	EditText replyContentEditText;
+	EditText replyTitleEditText;
+	Button submitButton;
+	Button cancelButton;
 	
 	String urlSource = "http://bbs.sjtu.edu.cn/bbswappst?board=love&file=M.1297309753.A";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.reply);
 		
-		replyTitle = (EditText)findViewById(R.id.replaytitle);
-		replyContent = (EditText)findViewById(R.id.replycontent);
-		submit = (Button) findViewById(R.id.replysubmit);
+		replyTitleEditText = (EditText)findViewById(R.id.replaytitle);
+		replyContentEditText = (EditText)findViewById(R.id.replycontent);
+		submitButton = (Button) findViewById(R.id.replysubmit);
 		
-		submit.setOnClickListener(submitListener);
+		submitButton.setOnClickListener(submitListener);
 		
 		try {
 			String source = Net.getInstance().get(urlSource);
 			ReplyParser parser = new ReplyParser(source);
 			String temp = parser.GetTitle();
-			replyTitle.setText(temp);
-			replyContent.setText(parser.GetContent());
+			replyTitleEditText.setText(temp);
+			replyContentEditText.setText(parser.GetContent());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,8 +54,8 @@ public class ReplyActivity extends Activity {
 			String reidstr = file.substring(2, file.length()-2);
 			
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add( new BasicNameValuePair("title",replyTitle.getText().toString()));
-			params.add( new BasicNameValuePair("text",replyContent.getText().toString()));
+			params.add( new BasicNameValuePair("title",replyTitleEditText.getText().toString()));
+			params.add( new BasicNameValuePair("text",replyContentEditText.getText().toString()));
 			params.add( new BasicNameValuePair("board",board));
 			params.add( new BasicNameValuePair("file",file));
 			params.add( new BasicNameValuePair("reidstr",reidstr));
@@ -70,7 +69,6 @@ public class ReplyActivity extends Activity {
 			try {
 				Net.getInstance().post("http://bbs.sjtu.edu.cn/bbswapsnd", params);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 //			params.add( new BasicNameValuePair("content",replyContent.getText().toString()));

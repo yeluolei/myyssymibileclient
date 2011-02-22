@@ -1,23 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-  <ScrollView android:id="@+id/ScrollView01"
-   android:layout_width="wrap_content" 
-   android:layout_height="wrap_content">
-<LinearLayout android:orientation="vertical" android:id="@+id/LinearLayout02" android:layout_width="fill_parent" android:layout_height="fill_parent">
- <LinearLayout android:layout_height="wrap_content" android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:orientation="horizontal">
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/background">
+	<LinearLayout
+		android:id="@+id/head"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true">
+		<include
+			layout="@layout/head"></include>
+	</LinearLayout>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/replytitle"
+		android:layout_below="@+id/head"
+		android:textColor="@color/topictitle"
+		android:id="@+id/replytitletextview"
+		android:layout_marginLeft="25dip"
+		android:layout_marginTop="30dip"></TextView>
+	<EditText
+		android:layout_height="wrap_content"
+		android:id="@+id/replaytitle"
+		android:text="@+id/replaytitle"
+		android:background="@drawable/bg_input_panel"
+		android:layout_below="@+id/replytitletextview"
+		android:layout_alignLeft="@+id/replytitletextview"
+		android:layout_width="fill_parent"
+		android:layout_marginRight="25dip"
+		android:layout_marginTop="5dip"
+		android:textSize="12sp"></EditText>
+	<TextView
+		android:layout_height="wrap_content"
+		android:id="@+id/replycontenttextview"
+		android:layout_width="wrap_content"
+		android:layout_below="@+id/replaytitle"
+		android:layout_alignLeft="@+id/replaytitle"
+		android:textColor="@color/topictitle"
+		android:layout_marginTop="5dip"
+		android:text="@string/replycontent"></TextView>
 
-<TextView android:layout_width="wrap_content" android:id="@+id/TextView01" android:layout_height="wrap_content" android:text="title"></TextView>
-<EditText android:text="@+id/replaytitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/replaytitle"></EditText>
-</LinearLayout>
-<TextView android:text="content" android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	<EditText
+		android:layout_height="wrap_content"
+		android:id="@+id/replycontent"
+		android:text="@+id/replycontent"
+		android:background="@drawable/bg_input_panel"
+		android:layout_below="@+id/replycontenttextview"
+		android:layout_alignLeft="@+id/replycontenttextview"
+		android:layout_width="fill_parent"
+		android:layout_marginRight="25dip"
+		android:layout_marginTop="5dip"
+		android:layout_above="@+id/replysubmit"
+		android:layout_marginBottom="10dip"
+		android:textSize="12sp" android:gravity="top"></EditText>
 
-<EditText android:text="@+id/replycontent" android:id="@+id/replycontent" android:layout_width="wrap_content" android:layout_height="wrap_content"></EditText>
-
-<Button android:text="submit" android:id="@+id/replysubmit" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-</LinearLayout>
-</ScrollView>
-</LinearLayout>
+	<Button
+		android:layout_height="wrap_content"
+		android:text="submit"
+		android:background="@drawable/buttonbackground"
+		android:id="@+id/replysubmit"
+		android:layout_width="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="30dip"
+		android:layout_marginLeft="50dip"></Button>
+	<Button
+		android:layout_height="wrap_content"
+		android:text="cancel"
+		android:background="@drawable/buttonbackground"
+		android:id="@+id/replycancel"
+		android:layout_width="wrap_content"
+		android:layout_alignTop="@+id/replysubmit"
+		android:layout_alignBottom="@+id/replysubmit"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="50dip"></Button>
+</RelativeLayout>

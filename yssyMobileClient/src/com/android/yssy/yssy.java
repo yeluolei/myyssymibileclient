@@ -1,191 +1,44 @@
 package com.android.yssy;
 
+import com.android.utli.utli;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-
-import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.os.Handler;
 
-public class yssy extends Activity {
-
-	private TextView tView ;
-	private Button connectButton;
-	private Button loginbutton;
-	private EditText username;
-	private EditText passwd;
-	private Button popmusicButton;
-	private Button topicmodeButton;
-	private Button thememode;
-	private Button replyButton;
-
-	/** Called when the activity is first created. */
+public class yssy extends Activity{
+	private final int delay = 2000;
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-
-		tView = (TextView)findViewById(R.id.TextView);
-		connectButton = (Button)findViewById(R.id.connect);
-		loginbutton = (Button)findViewById(R.id.Button01);
-		username = (EditText)findViewById(R.id.EditText01);
-		passwd = (EditText)findViewById(R.id.EditText02);
-		popmusicButton = (Button)findViewById(R.id.popmusic);
-		topicmodeButton = (Button)findViewById(R.id.topicmode);
-		thememode = (Button)findViewById(R.id.theme);
-		replyButton = (Button)findViewById(R.id.btreply);
-		
-		//控件的控制逻辑在这里定义
-		//把逻辑new在外面，方便阅读
-		connectButton.setOnClickListener(connect);
-		loginbutton.setOnClickListener(login);
-		thememode.setOnClickListener(themelisten);
-		replyButton.setOnClickListener(replylisten);
-		
-		popmusicButton.setOnClickListener(popmusic);
-		topicmodeButton.setOnClickListener(topic);
+		setContentView(R.layout.start);
+		Handler handler = new Handler();
+		handler.postDelayed(new starthandler(), delay);
 	}
 	
-	private Button.OnClickListener topic = new Button.OnClickListener() {
-		public void onClick(View v) {
+	class starthandler implements Runnable
+	{
+		@Override
+		public void run() {
+			SharedPreferences sharedPreferences  = getSharedPreferences("config", MODE_PRIVATE);
+			utli.userName = sharedPreferences.getString("username",null);
+			utli.password = sharedPreferences.getString("password",null);
+			utli.remember = sharedPreferences.getBoolean("remember", false);
+			utli.auto = sharedPreferences.getBoolean("auto", false);
+			utli.topicmode = sharedPreferences.getBoolean("topicmode", false);
 			Intent intent = new Intent();
-			intent.setClass(yssy.this,TopicPostListActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("url","http://bbs.sjtu.edu.cn/bbswaptdoc,board,PopMusic.html");
-			intent.putExtras(bundle);
+			if(utli.auto == false) {
+			     intent.setClass(yssy.this,LoginActivity.class);
+			}else {
+				intent.setClass(yssy.this,LoginingActivity.class);
+			}
 			startActivity(intent);
 			yssy.this.finish();
 		}
-	};
-	
-	private Button.OnClickListener popmusic = new Button.OnClickListener() {
-		public void onClick(View v) {
-			Intent intent = new Intent();
-			intent.setClass(yssy.this, postListActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("url","http://bbs.sjtu.edu.cn/bbswapdoc?board=PopMusic");
-			intent.putExtras(bundle);
-			startActivity(intent);
-			yssy.this.finish();
-		}
-	};
-	
-	//这里加点注释吧
-	//connect按钮的控制逻辑
-	private Button.OnClickListener connect = new Button.OnClickListener() {
-		public void onClick(View v) {
-			Intent intent = new Intent();
-			intent.setClass(yssy.this, TopTenActivity.class);
-			startActivity(intent);
-			yssy.this.finish();
-		}
-	};
-	
-	private Button.OnClickListener themelisten = new Button.OnClickListener(){
-		public void onClick(View v){
-			Intent intent = new Intent();
-			intent.setClass(yssy.this, ThemeArticleActivity.class);
-			startActivity(intent);
-			yssy.this.finish();
-		}
-	};
-	
-	private Button.OnClickListener replylisten = new Button.OnClickListener(){
-		public void onClick(View v){
-			Intent intent = new Intent();
-			intent.setClass(yssy.this, ReplyActivity.class);
-			startActivity(intent);
-			yssy.this.finish();
-		}
-	};
-	
-	private Button.OnClickListener login = new Button.OnClickListener(){
-		public void onClick(View v){
-			try{  
-				List <NameValuePair> params = new ArrayList <NameValuePair>();   
-				params.add(new BasicNameValuePair("id", username.getText().toString()));   
-				params.add(new BasicNameValuePair("pw", passwd.getText().toString())); 
-				String sourceString = Net.getInstance().post("http://bbs.sjtu.edu.cn/bbswaplogin", params);
-
-				tView.setText(sourceString);
-//				DefaultHttpClient httpclient = new DefaultHttpClient();
-//				
-//				String uriAPI = "http://bbs.sjtu.edu.cn/bbswaplogin";   
-//				HttpPost httpRequest = new HttpPost(uriAPI);
-//				 
-//				List <NameValuePair> params = new ArrayList <NameValuePair>();   
-//				params.add(new BasicNameValuePair("id", username.getText().toString()));   
-//				params.add(new BasicNameValuePair("pw", passwd.getText().toString())); 
-//
-//				/* 添加请求参数到请求对象*/  
-//				httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));   
-//				/*发送请求并等待响应*/  
-//				HttpResponse httpResponse = httpclient.execute(httpRequest);   
-//				/*若状态码为200 ok*/  
-//				if(httpResponse.getStatusLine().getStatusCode() == 200)    
-//				{   
-//					
-//					List<Cookie> cookies = httpclient.getCookieStore().getCookies();  
-//			        if (cookies.isEmpty()) {  
-//			            tView.setText("None");  
-//			        } else {  
-//			        	String allString="";
-//			            for (int i = 0; i < cookies.size(); i++) {  
-//			                allString+=cookies.get(i).toString();  
-//			            }  
-//			            tView.setText(allString);
-//			            
-//			            
-//			            String mesguri = "http://bbs.sjtu.edu.cn/bbswappst?board=love&file=M.1297016948.A";
-//			            HttpGet httpget= new HttpGet(mesguri);
-//			            
-//			            
-//			            HttpResponse r = httpclient.execute(httpget);
-//			            
-//			            if (r.getStatusLine().getStatusCode()== 200)
-//			            {
-//							String strResult = EntityUtils.toString(r.getEntity());
-//							String newString = new String(strResult.getBytes(), "UTF-8");
-//							tView.setText(newString);
-//			            }
-//			     
-//			        }
-//					/*读返回数据*/  
-//				}   
-//				else   
-//				{   
-//					tView.setText("Error Response: "+httpResponse.getStatusLine().toString());   
-//				}   
-			}   
-			catch (Exception e) {
-				tView.setText(e.getMessage().toString());   
-				e.printStackTrace();    
-			}   
-		}
-	};
-	
+	}
 }
 
 

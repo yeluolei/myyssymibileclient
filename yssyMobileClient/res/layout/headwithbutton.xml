@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="29dip"
+	android:background="@drawable/header">
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/activitytitle"
+		android:gravity="center"
+		android:textSize="14dip"
+		android:layout_marginLeft="5dip"
+		android:textColor="@color/write" />
+	<ImageButton
+		android:layout_alignParentRight="true"
+		android:layout_height="wrap_content"
+		android:background="@drawable/bt_area_down"
+		android:layout_width="30dip"
+		android:id="@+id/openarea"></ImageButton>
+</RelativeLayout>

@@ -1,50 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="?android:attr/listPreferredItemHeight">
-	<TextView
-		android:id="@+id/posttype"
-		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
-		android:layout_alignParentTop="true"
-		android:textSize="18px" />
-	<TextView
-		android:id="@+id/postindex"
-		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
-		android:layout_alignParentTop="true"
-		android:layout_toRightOf="@+id/posttype"
-		android:adjustViewBounds="true"
-		android:textSize="18px"
-		android:padding="2dip" />
-	<TextView
-		android:id="@+id/posttitle"
-		android:layout_width="wrap_content"
-		android:layout_height="fill_parent"
-		android:layout_alignParentTop="true"
-		android:layout_toRightOf="@+id/postindex"
-		android:adjustViewBounds="true"
-		android:textSize="18px"
-		android:padding="2dip" />
-	<TextView
-		android:id="@+id/posttime"
+	android:layout_height="wrap_content">
+	<RelativeLayout
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentLeft="true"
-		android:ellipsize="marquee"
-		android:textSize="14px"
-		android:paddingLeft="2dip" />
-	<TextView
-		android:id="@+id/postauthorid"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentRight="true"
-		android:layout_alignWithParentIfMissing="true"
-		android:gravity="center_vertical"
-		android:textSize="14px"
-		android:paddingRight="8dip" />
-</RelativeLayout>
+		android:layout_height="60dip"
+		android:background="@drawable/list_select">
+		<RelativeLayout
+			android:id="@+id/postlistitemleft"
+			android:layout_height="fill_parent"
+			android:layout_width="50dip">
+			<ImageView
+				android:id="@+id/posttype"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentLeft="true"
+				android:layout_width="fill_parent"
+				android:src="@drawable/type1"
+				android:layout_height="35dip" />
+			<TextView
+				android:padding="2dip"
+				android:layout_height="wrap_content"
+				android:id="@+id/postindex"
+				android:layout_width="fill_parent"
+				android:layout_alignLeft="@+id/posttype"
+				android:textSize="8sp"
+				android:gravity="center"
+				android:layout_alignParentBottom="true"
+				android:layout_marginBottom="5dip"></TextView>
 
+		</RelativeLayout>
+		<RelativeLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_toRightOf="@+id/postlistitemleft">
+			<TextView
+				android:id="@+id/posttitle"
+				android:layout_alignParentTop="true"
+				android:adjustViewBounds="true"
+				android:padding="2dip"
+				android:textSize="14sp"
+				android:textColor="@color/topictitle"
+				android:layout_alignLeft="@+id/posttitle"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="5dip"
+				android:layout_marginRight="5dip" />
+			<TextView
+				android:text="@+id/TextView01"
+				android:layout_height="wrap_content"
+				android:textColor="@color/time"
+				android:textSize="12sp"
+				android:id="@+id/posttime"
+				android:layout_width="wrap_content"
+				android:ellipsize="marquee"
+				android:layout_alignLeft="@+id/posttitle"
+				android:layout_alignParentBottom="true"
+				android:layout_marginBottom="5dip"></TextView>
+			<TextView
+				android:id="@+id/postauthorid"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true"
+				android:gravity="center_vertical"
+				android:layout_alignRight="@+id/posttitle"
+				android:textSize="12sp"
+				android:textColor="@color/id"
+				android:paddingRight="5dip"
+				android:layout_marginBottom="5dip" />
+		</RelativeLayout>
+	</RelativeLayout>
+</LinearLayout>
+
+
+<!--<?xml version="1.0" encoding="utf-8"?> <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_width="fill_parent" android:background="@drawable/list_select" 
+	android:layout_height="80dip"> <ImageView android:id="@+id/posttype" android:layout_alignParentTop="true" 
+	android:layout_alignParentLeft="true" android:layout_width="50dip" android:layout_height="fill_parent" 
+	android:src="@drawable/type1"/> <TextView android:id="@+id/posttitle" android:layout_alignParentTop="true" 
+	android:padding="2dip" android:textSize="14sp" android:textColor="@color/topictitle" 
+	android:layout_alignLeft="@+id/posttitle" android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" android:layout_toRightOf="@+id/posttype"/> 
+	<TextView android:layout_height="wrap_content" android:textColor="@color/time" 
+	android:textSize="12sp" android:id="@+id/posttime" android:layout_width="wrap_content" 
+	android:ellipsize="marquee" android:layout_alignLeft="@+id/posttitle" android:layout_below="@+id/posttitle"></TextView> 
+	<TextView android:id="@+id/postauthorid" android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_alignRight="@+id/posttitle" 
+	android:textSize="12sp" android:textColor="@color/id" android:paddingRight="5dip" 
+	android:layout_below="@+id/posttitle"/> </RelativeLayout> -->

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:id="@+id/prepage"
+		android:background="@drawable/tab_one_normal"
+		android:layout_width="80dip"
+		android:layout_height="wrap_content">
+		<RelativeLayout
+			android:layout_gravity="center"
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent">
+			<ImageView
+				android:src="@drawable/btn_browser_back"
+				android:layout_alignParentTop="true"
+				android:id="@+id/back"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"></ImageView>
+			<TextView
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:layout_width="wrap_content"
+				android:layout_gravity="center"
+				android:textSize="12sp"
+				android:layout_below="@+id/back" android:text="@string/foottopic1"/>
+		</RelativeLayout>
+	</LinearLayout>
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/line" />
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:layout_height="wrap_content"
+		android:background="@drawable/tab_one_normal"
+		android:id="@+id/nextpage"
+		android:layout_width="80dip">
+		<RelativeLayout
+			android:layout_gravity="center"
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent">
+			<ImageView
+				android:layout_alignParentTop="true"
+				android:id="@+id/foward"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/btn_browser_forward"></ImageView>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:layout_gravity="center"
+				android:textSize="12sp"
+				android:layout_below="@+id/foward" android:text="@string/foottopic2"/>
+		</RelativeLayout>
+
+
+	</LinearLayout>
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/line" />
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:id="@+id/topicmode"
+		android:layout_height="wrap_content"
+		android:background="@drawable/tab_one_normal"
+		android:layout_width="80dip">
+		<RelativeLayout
+			android:layout_gravity="center"
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent">
+			<ImageView
+				android:layout_alignParentTop="true"
+				android:id="@+id/mode"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/mode_button"></ImageView>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:layout_gravity="center"
+				android:textSize="12sp"
+				android:layout_below="@+id/mode" android:text="@string/foottopic3"/>
+		</RelativeLayout>
+	</LinearLayout>
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/line" />
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical"
+		android:id="@+id/more"
+		android:layout_height="wrap_content"
+		android:layout_width="80dip"
+		android:background="@drawable/header">
+		<RelativeLayout
+			android:layout_gravity="center"
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent">
+			<ImageView
+				android:layout_alignParentTop="true"
+				android:id="@+id/more"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:src="@drawable/more"></ImageView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:layout_gravity="center"
+			android:textSize="12sp" android:layout_below="@+id/more" android:text="@string/foottopic4"/>
+			</RelativeLayout>
+	</LinearLayout>
+</LinearLayout>

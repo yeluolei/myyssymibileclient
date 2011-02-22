@@ -9,7 +9,8 @@
 		android:label="@string/app_name">
 		<activity
 			android:name=".yssy"
-			android:label="@string/app_name">
+			android:label="@string/app_name"
+			android:screenOrientation="portrait" android:theme="@style/Theme.NoBackground">
 			<intent-filter>
 				<action
 					android:name="android.intent.action.MAIN" />
@@ -19,11 +20,27 @@
 		</activity>
 
 		<activity
-			android:name="TopTenActivity"></activity>
-		<activity android:name="postListActivity"></activity>
-		<activity android:name="TopicPostListActivity"></activity>
-		<activity android:name="ThemeArticleActivity"></activity>
-		<activity android:name="ReplyActivity"></activity>
+			android:name="TopTenActivity"
+			android:screenOrientation="portrait" android:theme="@style/Theme.NoBackground"></activity>
+		<activity
+			android:name="PostListActivity"
+			android:screenOrientation="portrait" android:theme="@style/Theme.NoBackground"></activity>
+		<activity
+			android:name="TopicPostListActivity"
+			android:screenOrientation="portrait" android:theme="@style/Theme.NoBackground"></activity>
+		<activity
+			android:name="ThemeArticleActivity"
+			android:screenOrientation="portrait" android:theme="@style/Theme.NoBackground"></activity>
+		<activity
+			android:name="ReplyActivity"
+			android:screenOrientation="portrait" android:theme="@style/Theme.NoBackground"></activity>
+		<activity
+			android:name="LoginActivity"
+			android:screenOrientation="portrait" android:theme="@style/Theme.NoBackground"></activity>
+		<activity
+			android:name="LoginingActivity"
+			android:screenOrientation="portrait" android:theme="@style/Theme.NoBackground"></activity>
+
 
 	</application>
 	<uses-permission
