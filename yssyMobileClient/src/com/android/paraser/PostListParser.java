@@ -1,4 +1,12 @@
-package com.android.paraser;
+package com.bbs.paraser;
+
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +15,8 @@ import java.util.Map;
 
 import android.util.Log;
 
-import com.android.utli.Net;
-import com.android.yssy.R;
+import com.bbs.yssy.R;
+import com.bbs.util.Net;
 
 public class PostListParser implements PostParser{
 	private List<Map<String, Object>> postItems;
@@ -62,7 +70,7 @@ public class PostListParser implements PostParser{
 			prepos = sourceString.indexOf("<hr>",pastpos2)+4;
 			pastpos2 = sourceString.indexOf("<hr/>",prepos);
 			
-			while(prepos <= pastpos2) 
+			while(prepos < pastpos2) 
 			{
 				Map<String, Object> map = new HashMap<String, Object>();
 				pastpos1 = sourceString.indexOf("<a",prepos);
@@ -97,16 +105,28 @@ public class PostListParser implements PostParser{
 				prepos = pastpos1+1;
 				pastpos1 = sourceString.indexOf("</a>",prepos);
 				String title = sourceString.substring(prepos,pastpos1);
+				if (title.startsWith("<font"))
+				{
+					int p = title.indexOf("</font>",0);
+					title = title.substring(p+7);
+				}
+/*				else if(title.startsWith("</font>")) {
+					int p = title.indexOf("<font",0);
+					p = title.indexOf(">",p)+1;
+					int q = title.indexOf("</font>",p);
+					title =title.substring(p,q);
+				}*/
+				title.replace("&amp;","&");
 				int type;
 				if (title.startsWith("Re:")) 
 				{
 					title = title.substring(4);
-					type = R.drawable.type1;
+					type = R.drawable.type2;
 				}
 				else 
 				{
 					title = title.substring(1).trim();
-					type = R.drawable.type2;
+					type = R.drawable.type1;
 				}
 				
 				map.put("type", type);

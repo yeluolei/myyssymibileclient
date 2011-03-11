@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:background="@drawable/background">
@@ -25,14 +24,12 @@
 	<EditText
 		android:layout_height="wrap_content"
 		android:id="@+id/replaytitle"
-		android:text="@+id/replaytitle"
 		android:background="@drawable/bg_input_panel"
 		android:layout_below="@+id/replytitletextview"
 		android:layout_alignLeft="@+id/replytitletextview"
 		android:layout_width="fill_parent"
 		android:layout_marginRight="25dip"
-		android:layout_marginTop="5dip"
-		android:textSize="12sp"></EditText>
+		android:layout_marginTop="5dip" android:textSize="16sp" android:imeOptions="actionNext"></EditText>
 	<TextView
 		android:layout_height="wrap_content"
 		android:id="@+id/replycontenttextview"
@@ -46,7 +43,6 @@
 	<EditText
 		android:layout_height="wrap_content"
 		android:id="@+id/replycontent"
-		android:text="@+id/replycontent"
 		android:background="@drawable/bg_input_panel"
 		android:layout_below="@+id/replycontenttextview"
 		android:layout_alignLeft="@+id/replycontenttextview"
@@ -55,25 +51,20 @@
 		android:layout_marginTop="5dip"
 		android:layout_above="@+id/replysubmit"
 		android:layout_marginBottom="10dip"
-		android:textSize="12sp" android:gravity="top"></EditText>
+		android:gravity="top" android:textSize="16sp" android:imeOptions="actionDone"></EditText>
 
 	<Button
-		android:layout_height="wrap_content"
-		android:text="submit"
 		android:background="@drawable/buttonbackground"
 		android:id="@+id/replysubmit"
-		android:layout_width="wrap_content"
-		android:layout_alignParentBottom="true"
 		android:layout_marginBottom="30dip"
-		android:layout_marginLeft="50dip"></Button>
+		android:layout_marginLeft="50dip" android:layout_alignParentBottom="true" android:text="发表" android:gravity="center" android:layout_width="80dip" android:layout_height="35dip"></Button>
 	<Button
 		android:layout_height="wrap_content"
-		android:text="cancel"
 		android:background="@drawable/buttonbackground"
 		android:id="@+id/replycancel"
 		android:layout_width="wrap_content"
 		android:layout_alignTop="@+id/replysubmit"
 		android:layout_alignBottom="@+id/replysubmit"
 		android:layout_alignParentRight="true"
-		android:layout_marginRight="50dip"></Button>
+		android:layout_marginRight="50dip" android:text="取消" android:gravity="center"></Button>
 </RelativeLayout>

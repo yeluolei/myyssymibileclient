@@ -1,7 +1,12 @@
-package com.android.uiadapter;
+package com.bbs.uiadapter;
 
-
-import java.util.HashMap;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 import java.util.List;
 import java.util.Map;
 
@@ -13,24 +18,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.yssy.R;
+import com.bbs.yssy.R;
 
 public class PostListAdapter  extends BaseAdapter{
 	private Context context;
 	private List<Map<String, Object>>datas;
-	HashMap<Integer, View> m;
+
 	public PostListAdapter(Context context) {
 		this.context = context;
-		m = new HashMap<Integer, View>(); 
 	}
 
 	public PostListAdapter(Context context,List<Map<String, Object>>datas)
 	{
 		this.context = context;
 		this.datas = datas;
-		m = new HashMap<Integer, View>(); 
 	}
-	
+
 	public void clear() 
 	{
 		this.datas.clear();
@@ -41,9 +44,9 @@ public class PostListAdapter  extends BaseAdapter{
 			return 0;
 		}
 		else {
-		    return datas.size();
+			return datas.size();
 		}
-		
+
 	}  
 
 	@Override
@@ -80,7 +83,7 @@ public class PostListAdapter  extends BaseAdapter{
 		viewHolder.postIndexTextView.setText((CharSequence) datas.get(location).get("PostIndex"));
 		return convertView;
 	}
-	
+
 	public static class ViewHolder
 	{
 		public TextView titleTextView;

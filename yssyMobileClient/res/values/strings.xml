@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="hello">this is my first android application</string>
-    <string name="app_name">饮水思源</string>
-    <string name="UserName">用户名：</string>
-    <string name="Password">密码：</string>
-    <string name="copyright">©饮水思源  bbs.sjtu.edu.cn</string>
-    <string name="loginin">登入</string>
-    <string name="rememberpassword">记住密码</string>
-    <string name="automaticlogin">自动登入</string>
-    <string name="selectborad">Please Select Board:</string>
-    <string name="loading">正在载入...</string>
-    <string name="inputhint">请输入板块名称</string>
-    <string name="foot1">home</string>
-    <string name="foot2">Publish</string>
-    <string name="foot3">Change</string>
-    <string name="foot4">more</string>
-    <string name="foottopic1">上一页</string>
-    <string name="foottopic2">下一页</string>
-    <string name="foottopic3">模式切换</string>
-    <string name="foottopic4">更多</string>
-    <string name="reply">回复</string>
-    <string name="view">查看</string>
-    <string name="replytitle">Title:</string>
-    <string name="replycontent">Content:</string>
+	<string
+		name="app_name">饮水思源</string>
+	<string
+		name="UserName">用户名：</string>
+	<string
+		name="Password">密码：</string>
+	<string
+		name="copyright">©饮水思源 bbs.sjtu.edu.cn</string>
+	<string
+		name="loginin">登入</string>
+	<string
+		name="rememberpassword">记住密码</string>
+	<string
+		name="automaticlogin">自动登入</string>
+	<string
+		name="selectborad">选择板面:</string>
+	<string
+		name="loading">正在载入...</string>
+	<string
+		name="inputhint">请输入板块名称</string>
+	<string
+		name="foottopic1">上一页</string>
+	<string
+		name="foottopic2">下一页</string>
+	<string
+		name="foottopic3">模式切换</string>
+	<string
+		name="foottopic4">更多</string>
+	<string
+		name="newpost">发表文章</string>
+	<string
+		name="changeaccount">切换帐号</string>
+	<string
+		name="reload">重新载入</string>
+	<string
+		name="retop">回到十大</string>
+	<string
+		name="fav">收藏此板</string>
+	<string
+		name="gotofav">收藏夹</string>
+	<string
+		name="replytitle">文章标题:</string>
+	<string
+		name="replycontent">文章内容:</string>
 </resources>

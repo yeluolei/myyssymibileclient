@@ -8,4 +8,5 @@
     <color name="id">#C28DE3</color>
     <color name="list_background">#8EA9DF</color>
     <color name="list_line">#B6E4D5</color>
+    <color name="contentbackground">#FFFFFF</color>
 </resources>

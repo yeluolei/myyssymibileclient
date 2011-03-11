@@ -1,6 +1,11 @@
-package com.android.yssy;
-import com.android.utli.utli;
-
+package com.bbs.yssy;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +17,8 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.bbs.util.Utli;
 /**
  * @author Csai
  *
@@ -37,12 +44,12 @@ public class LoginActivity extends Activity {
 		loginButton = (Button)findViewById(R.id.LoginButton);
 
 
-		rememberpasswordCheckBox.setChecked(utli.remember);
-		automaticloginCheckBox.setChecked(utli.auto);
+		rememberpasswordCheckBox.setChecked(Utli.remember);
+		automaticloginCheckBox.setChecked(Utli.auto);
 		
 		activitynameTextView.setText("µ«»Î");
-		usernameEditText.setText(utli.userName);
-		passwordEditText.setText(utli.password);
+		usernameEditText.setText(Utli.userName);
+		passwordEditText.setText(Utli.password);
 		rememberpasswordCheckBox.setOnCheckedChangeListener(rememberListener);
 		automaticloginCheckBox.setOnCheckedChangeListener(automaticClickListener);
 		loginButton.setOnClickListener(loginListener);
@@ -51,11 +58,11 @@ public class LoginActivity extends Activity {
 	public OnClickListener loginListener = new OnClickListener() {
 		@Override
 		public void onClick(View arg0) {
-			utli.userName = usernameEditText.getText().toString();
-			utli.password = passwordEditText.getText().toString();
+			Utli.userName = usernameEditText.getText().toString();
+			Utli.password = passwordEditText.getText().toString();
 			Intent intent = new Intent(LoginActivity.this,LoginingActivity.class);
 			startActivity(intent);
-			LoginActivity.this.finish();
+			//LoginActivity.this.finish();
 		}
 	};
 
@@ -64,10 +71,10 @@ public class LoginActivity extends Activity {
 		public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 			if (rememberpasswordCheckBox.isChecked()) 
 			{
-				utli.remember = true;
+				Utli.remember = true;
 			}
 			else {
-				utli.remember= false;
+				Utli.remember= false;
 			}
 		}
 	};
@@ -78,11 +85,11 @@ public class LoginActivity extends Activity {
 		public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 			if (automaticloginCheckBox.isChecked()) 
 			{
-				utli.auto = true;
+				Utli.auto = true;
 				rememberpasswordCheckBox.setChecked(true);
 			}
 			else {
-				utli.auto = false;
+				Utli.auto = false;
 			}
 		}
 	};

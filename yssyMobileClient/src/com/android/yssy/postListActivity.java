@@ -1,19 +1,28 @@
-package com.android.yssy;
+package com.bbs.yssy;
+
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 
 import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
 import android.widget.AdapterView;
@@ -28,11 +37,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.paraser.PostListParser;
-import com.android.paraser.PostParser;
-import com.android.paraser.TopicPostListParser;
-import com.android.uiadapter.PostListAdapter;
-import com.android.utli.utli;
+import com.bbs.paraser.PostListParser;
+import com.bbs.paraser.PostParser;
+import com.bbs.paraser.TopicPostListParser;
+import com.bbs.uiadapter.PostListAdapter;
+import com.bbs.util.FavListEdit;
+import com.bbs.util.Net;
+import com.bbs.util.Utli;
 
 public class PostListActivity extends Activity{
 	private ListView postlistview;
@@ -46,11 +57,15 @@ public class PostListActivity extends Activity{
 
 	private PostParser parser;
 	private PostListAdapter adapter;
-
 	private String url;
 
-	private final int MENU_REPLY = 10;
-	private final int MENU_VIEW = 11;
+
+	private final int MENU_CHANGEACCOUNT = 10;   // 切换帐号
+	private final int MENU_NEWPOST = 11;         // 发表文章
+	private final int MENU_RELOAD = 12;          // 刷新
+	private final int MENU_RETURNTOPTEN = 13;    // 返回十大
+	private final int MENU_FAV = 14 ;            // 收藏此版面
+	private final int MENU_GOTOFAV = 15 ;        // 前往收藏夹
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
@@ -71,10 +86,11 @@ public class PostListActivity extends Activity{
 		processLayout = (RelativeLayout)findViewById(R.id.progresslayout);
 
 		postlistview.setOnItemClickListener(gotopost);
-		postlistview.setOnCreateContextMenuListener(listmenu);
 		prepage.setOnClickListener(prepageClickListener);
 		nextpage.setOnClickListener(nextpageClickListener);
 		topicmode.setOnClickListener(modeClickListener);
+		more.setOnCreateContextMenuListener(moremenu);
+		more.setOnClickListener(moreClickListener);
 		areadownButton.setOnClickListener(areadownClickListener);
 		gotoButton.setOnClickListener(gotoboards);
 
@@ -90,9 +106,10 @@ public class PostListActivity extends Activity{
 
 	private void init() 
 	{	
+		boardsarealLayout.setVisibility(View.GONE);
 		String titleString = url;
 		ListLoad listLoad = new ListLoad();
-		if (utli.topicmode == true) 
+		if (Utli.topicmode == true) 
 		{
 			titleString += "-主题模式";
 			listLoad.execute("http://bbs.sjtu.edu.cn/bbswaptdoc,board,"+url+".html");
@@ -124,15 +141,13 @@ public class PostListActivity extends Activity{
 	{
 		@Override
 		public void onClick(View arg0) {
-			utli.topicmode = !utli.topicmode;
+			Utli.topicmode = !Utli.topicmode;
+			if (Utli.topicmode) {
+				Toast.makeText(getApplicationContext(),"切换到主题模式",Toast.LENGTH_SHORT).show();
+			}else {
+				Toast.makeText(getApplicationContext(),"切换到一般模式",Toast.LENGTH_SHORT).show();
+			}
 			init();
-			//			Intent intent = new Intent(PostListActivity.this,TopicPostListActivity.class);
-			//			Bundle bundle = new Bundle();
-			//			bundle.putString("url", url);
-			//			intent.putExtras(bundle);
-			//			startActivity(intent);
-			//			PostListActivity.this.finish();
-			//			Log.v("切换为", String.valueOf(utli.topicmode));
 		}
 	};
 
@@ -170,77 +185,139 @@ public class PostListActivity extends Activity{
 		}
 	};
 
-	// 这里跳转的Activity还没有
+	// 跳转到文章阅读
 	public OnItemClickListener gotopost = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 		{
 			@SuppressWarnings("unchecked")
-			String Link =String.valueOf(((Map<String, Object>)
-					postlistview.getItemAtPosition(position)).get("Link"));
+			Map<String,Object> Item = (Map<String, Object>)postlistview.getItemAtPosition(position);
+			String Link =String.valueOf(Item.get("Link"));
 			Intent intent = new Intent();
 			Bundle bundle = new Bundle();
-			if(utli.topicmode==true) {
-				intent.setClass(PostListActivity.this,ThemeArticleActivity.class);
-				bundle.putString("url","http://bbs.sjtu.edu.cn"+Link);
-			}else {
-				// TODO 跳转到一般模式文章阅读
-			}
+			intent.setClass(PostListActivity.this,ThemeArticleActivity.class);
+			bundle.putString("url","http://bbs.sjtu.edu.cn/"+Link);
+			bundle.putString("title",String.valueOf(Item.get("title")));
 			intent.putExtras(bundle);
 			startActivity(intent);
-			PostListActivity.this.finish();
+			//PostListActivity.this.finish();
 		}
 	};
 
+	// 点击弹出菜单
+	protected OnClickListener moreClickListener = new OnClickListener() {
 
-	// 为List添加弹出菜单
-	public OnCreateContextMenuListener listmenu = new OnCreateContextMenuListener() {
+		@Override
+		public void onClick(View arg0) {
+			more.showContextMenu();
+		}
+	};
+
+	// 为more添加弹出菜单
+	public OnCreateContextMenuListener moremenu = new OnCreateContextMenuListener() {
 		@Override
 		public void onCreateContextMenu(ContextMenu menu, View v,
 				ContextMenuInfo menuinfo) {
-			menu.add(Menu.NONE,MENU_REPLY,0,R.string.reply).setOnMenuItemClickListener(replyItemClickListener);
-			menu.add(Menu.NONE,MENU_VIEW,1,R.string.view).setOnMenuItemClickListener(viewItemClickListener);
+			menu.add(Menu.NONE,MENU_NEWPOST,0,R.string.newpost).setOnMenuItemClickListener(newpostItemClickListener);
+			menu.add(Menu.NONE,MENU_RELOAD,1,R.string.reload).setOnMenuItemClickListener(reloadItemClickListener);
+			menu.add(Menu.NONE,MENU_CHANGEACCOUNT,2,R.string.changeaccount).setOnMenuItemClickListener(changeaccountItemClickListener);
+			menu.add(Menu.NONE,MENU_RETURNTOPTEN,3,R.string.retop).setOnMenuItemClickListener(regotopItemClickListener);
+			menu.add(Menu.NONE,MENU_FAV,4,R.string.fav).setOnMenuItemClickListener(addfavItemClickListener);
+			menu.add(Menu.NONE,MENU_GOTOFAV,5,R.string.gotofav).setOnMenuItemClickListener(gotofavItemClickListener);
 		}
 	};
 
-
-	// 弹出按钮
-	// 回复文章选项
-	public OnMenuItemClickListener replyItemClickListener = new OnMenuItemClickListener() {
+	// 前往收藏夹
+	protected OnMenuItemClickListener gotofavItemClickListener = new OnMenuItemClickListener() {
 
 		@Override
-		public boolean onMenuItemClick(MenuItem menuitem) {
-			AdapterView.AdapterContextMenuInfo ifo = (AdapterView.AdapterContextMenuInfo)menuitem.getMenuInfo();
-
+		public boolean onMenuItemClick(MenuItem arg0) {
+			Intent intent = new Intent(PostListActivity.this,FavListActivity.class);
+			startActivity(intent);
 			return false;
 		}
 	};
 
-
-	// 弹出按钮
-	// 查看文章选项
-	public OnMenuItemClickListener viewItemClickListener = new OnMenuItemClickListener() {
+	// 发表文章
+	protected OnMenuItemClickListener newpostItemClickListener = new OnMenuItemClickListener() {
 		@Override
 		public boolean onMenuItemClick(MenuItem menuitem) {
-			AdapterView.AdapterContextMenuInfo ifo = (AdapterView.AdapterContextMenuInfo)menuitem.getMenuInfo();
-			@SuppressWarnings("unchecked")
-			String Link =String.valueOf(((Map<String, Object>)
-					postlistview.getItemAtPosition(ifo.position)).get("Link"));
-			Intent intent = new Intent(PostListActivity.this,ThemeArticleActivity.class);
+			Intent intent = new Intent(PostListActivity.this,ReplyActivity.class);
 			Bundle bundle = new Bundle();
-			bundle.putString("url","http://bbs.sjtu.edu.cn"+Link);
+			bundle.putString("board",url);
 			intent.putExtras(bundle);
 			startActivity(intent);
-			PostListActivity.this.finish();
+			//PostListActivity.this.finish();
 			return false;
 		}
 	};
 
+	//回到十大
+	protected  OnMenuItemClickListener regotopItemClickListener = new OnMenuItemClickListener() {
+		@Override
+		public boolean onMenuItemClick(MenuItem arg0) {
+			Intent intent = new Intent(PostListActivity.this,TopTenActivity.class);
+			startActivity(intent);
+			return false;
+		}
+	};
+	// 切换帐号
+	protected OnMenuItemClickListener changeaccountItemClickListener = new OnMenuItemClickListener() {
+		@Override
+		public boolean onMenuItemClick(MenuItem menuitem) {
+			//			AdapterView.AdapterContextMenuInfo ifo = (AdapterView.AdapterContextMenuInfo)menuitem.getMenuInfo();
+			//			@SuppressWarnings("unchecked")
+			//			String Link =String.valueOf(((Map<String, Object>)
+			//					postlistview.getItemAtPosition(ifo.position)).get("Link"));
+			//			Intent intent = new Intent(PostListActivity.this,ThemeArticleActivity.class);
+			//			Bundle bundle = new Bundle();
+			//			bundle.putString("url","http://bbs.sjtu.edu.cn"+Link);
+			//			intent.putExtras(bundle);
+			//			startActivity(intent);
+			//			PostListActivity.this.finish();
+			Intent intent = new Intent(PostListActivity.this,LoginActivity.class);
+			startActivity(intent);
+			Net.getInstance().clear();
+			//PostListActivity.this.finish();
+			return false;
+		}
+	};
+	// 添加收藏夹
+	protected OnMenuItemClickListener addfavItemClickListener = new OnMenuItemClickListener() {
+		@Override
+		public boolean onMenuItemClick(MenuItem arg0) {
+			if (Utli.favlist.contains(url)) 
+			{
+				Toast.makeText(getApplicationContext(),url+"已在收藏夹中",Toast.LENGTH_SHORT).show();
+			}
+			else if (Utli.favlist.add(url)) 
+			{
+				FavListEdit favListEdit = new FavListEdit(PostListActivity.this);
+				try {
+					favListEdit.save();
+					Toast.makeText(getApplicationContext(),url+"添加进收藏夹成功",Toast.LENGTH_SHORT).show();
+				} catch (Exception e) {
+					Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+				}
+			}else {
+				Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT).show();
+			}
+			return false;
+		}
+	};
 
-	// 获取文章列表
+	// 重新载入
+	protected OnMenuItemClickListener reloadItemClickListener = new OnMenuItemClickListener() {
+
+		@Override
+		public boolean onMenuItemClick(MenuItem arg0) {
+			init();
+			return false;
+		}
+	};	
+	// 获取文章列表 异步类	
 	private class ListLoad extends AsyncTask<String,Integer,List<Map<String, Object>>>
 	{
-
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -253,11 +330,11 @@ public class PostListActivity extends Activity{
 
 		@Override
 		protected List<Map<String, Object>> doInBackground(String... URL) {
-			if (utli.topicmode == true) {
+			if (Utli.topicmode == true) {
 				parser = new TopicPostListParser();
 			}
 			else {
-			    parser = new PostListParser();
+				parser = new PostListParser();
 			}
 			List<Map<String, Object>>postlist;
 			try {
@@ -277,23 +354,22 @@ public class PostListActivity extends Activity{
 		}
 	}
 
-
 	// 前往板面按钮的链接
 	public OnClickListener gotoboards= new OnClickListener() {
 		@Override
 		public void onClick(View arg0) {
 			url=boards.getText().toString();
 			init();
-			//			if (utli.topicmode == true)
-			//			{
-			//				intent.setClass(PostListActivity.this, TopicPostListActivity.class);
-			//			}
-			//			else {
-			//				intent.setClass(PostListActivity.this,PostListActivity.class);
-			//			}
-			//			intent.putExtras(bundle);
-			//			startActivity(intent);
-			//			PostListActivity.this.finish();
 		}
 	};
+	@Override
+	protected void onStop() {
+		super.onStop();
+		SharedPreferences dataSharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
+		SharedPreferences.Editor editor = dataSharedPreferences.edit();
+		editor.putBoolean("topicmode", Utli.topicmode);
+		editor.commit();
+	}
+	
+	
 }

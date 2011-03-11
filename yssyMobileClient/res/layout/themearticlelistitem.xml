@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:orientation="vertical"
-  android:layout_height="fill_parent">
- <LinearLayout android:id="@+id/LinearLayout01" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
-<TextView android:text="@+id/TextView01" android:id="@+id/author" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-<TextView android:text="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/time"></TextView>
-</LinearLayout>
-<TextView android:text="@+id/TextView03" android:id="@+id/Content" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<RelativeLayout
+		android:layout_height="wrap_content" android:background="@drawable/list_select" android:layout_width="fill_parent" android:gravity="top">
+		<TextView
+			android:text="@+id/TextView01"
+			android:id="@+id/author"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/id"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="15dip" android:layout_marginTop="5dip"></TextView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/time"
+			android:text="@+id/TextView02"
+			android:id="@+id/time"
+			android:layout_alignTop="@+id/author"
+			android:layout_alignBottom="@+id/author"
+			android:layout_alignParentRight="true" android:layout_marginRight="30dip"></TextView>
+		<TextView
+			android:text="@+id/TextView03"
+			android:id="@+id/content"
+			android:layout_below="@+id/time"
+			android:layout_alignParentLeft="true"
+			android:layout_width="fill_parent"
+			android:gravity="top" android:layout_height="wrap_content" android:layout_margin="5dip" android:textColor="@color/black"></TextView>
+	</RelativeLayout>
 </LinearLayout>

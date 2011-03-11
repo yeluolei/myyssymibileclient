@@ -35,7 +35,7 @@
 			android:layout_width="fill_parent"
 			android:background="@drawable/bg_input_panel"
 			android:layout_below="@+id/UserName"
-			android:singleLine="true"></EditText>
+			android:singleLine="true" android:imeOptions="actionNext"></EditText>
 		<TextView
 			android:textColor="@color/black"
 			android:layout_marginLeft="25dip"
@@ -55,7 +55,7 @@
 			android:background="@drawable/bg_input_panel"
 			android:password="true"
 			android:layout_below="@+id/Password"
-			android:singleLine="true"></EditText>
+			android:singleLine="true" android:imeOptions="actionDone"></EditText>
 		<CheckBox
 			android:layout_width="wrap_content"
 			android:id="@+id/automaticlogin"

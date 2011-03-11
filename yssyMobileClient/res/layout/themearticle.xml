@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-<ListView android:id="@+id/articlelist" android:layout_width="wrap_content" android:layout_height="wrap_content"></ListView>
-</LinearLayout>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:background="@drawable/background" android:layout_height="wrap_content">
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/head"
+		android:layout_alignParentTop="true">
+		<include
+			layout="@layout/head"></include>
+	</LinearLayout>
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/progresslayout"
+		android:layout_centerHorizontal="true"
+		android:visibility="gone" android:layout_below="@+id/head">
+		<ProgressBar
+			android:id="@+id/progress"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:indeterminate="true"
+			android:indeterminateDrawable="@drawable/progress">
+		</ProgressBar>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/progresstext"
+			android:layout_toRightOf="@+id/progress"
+			android:layout_alignTop="@+id/progress"
+			android:layout_alignBottom="@+id/progress"
+			android:gravity="center_vertical"
+			android:text="@string/loading"></TextView>
+	</RelativeLayout>
+	<ListView
+		android:id="@+id/articlelist"
+		android:layout_width="fill_parent"
+		android:layout_above="@+id/foot"
+		android:cacheColorHint="#00000000"
+		android:divider="@color/list_background"
+		android:dividerHeight="1dip"
+		android:layout_height="fill_parent" android:layout_below="@+id/progresslayout"></ListView>
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/foot"
+		android:layout_alignParentBottom="true">
+		<include
+			layout="@layout/articlefoot">
+		</include>
+	</LinearLayout>
+</RelativeLayout>

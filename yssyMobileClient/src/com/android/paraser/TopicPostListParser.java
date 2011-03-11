@@ -1,5 +1,11 @@
-package com.android.paraser;
-
+package com.bbs.paraser;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +13,8 @@ import java.util.Map;
 
 import android.util.Log;
 
-import com.android.utli.Net;
-import com.android.yssy.R;
+import com.bbs.yssy.R;
+import com.bbs.util.Net;
 
 public class TopicPostListParser implements PostParser {
 	private List<Map<String, Object>> postItems;
@@ -81,7 +87,7 @@ public class TopicPostListParser implements PostParser {
 				map.put("PostIndex", PostIndex);
 
 				prepos = sourceString.indexOf(">",pastpos1)+1;
-				pastpos1 = sourceString.indexOf("</",prepos);
+				pastpos1 = sourceString.indexOf("</a>",prepos);
 				map.put("authorID",sourceString.substring(prepos,pastpos1));
 
 				prepos = pastpos1 + 4;
@@ -95,8 +101,13 @@ public class TopicPostListParser implements PostParser {
 				map.put("Link",sourceString.substring(prepos,pastpos1));
 
 				prepos = pastpos1+1;
-				pastpos1 = sourceString.indexOf("<",prepos);
+				pastpos1 = sourceString.indexOf("</a>",prepos);
 				String title = sourceString.substring(prepos,pastpos1);
+				if (title.startsWith("<font"))
+				{
+					int p = title.indexOf("</font>",0);
+					title = title.substring(p+7);
+				}
 				int type;
 				if (title.startsWith("¡ð")) 
 				{

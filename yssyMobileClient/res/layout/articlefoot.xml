@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<RelativeLayout
+		android:layout_width="80dip"
+		android:id="@+id/prepage"
+		android:background="@drawable/tab_one_normal"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true">
+		<ImageView
+			android:src="@drawable/btn_browser_back"
+			android:layout_alignParentTop="true"
+			android:id="@+id/back"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"></ImageView>
+		<TextView
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:layout_width="wrap_content"
+			android:textSize="12sp"
+			android:layout_below="@+id/back"
+			android:layout_centerHorizontal="true" android:text="@string/foottopic1"/>
+	</RelativeLayout>
+
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/line"
+		android:layout_alignTop="@+id/prepage"
+		android:layout_alignBottom="@+id/prepage"
+		android:layout_toRightOf="@+id/prepage"
+		android:id="@+id/line1" />
+	<RelativeLayout
+		android:layout_height="wrap_content"
+		android:background="@drawable/tab_one_normal"
+		android:layout_width="160dip"
+		android:id="@+id/pages"
+		android:layout_alignTop="@+id/prepage"
+		android:layout_alignBottom="@+id/prepage"
+		android:layout_toRightOf="@+id/line1"><!-- <Button android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" android:text="0/1" android:background="#00000000" 
+			android:layout_centerInParent="true" android:textSize="22sp"></Button> -->
+		<TextView
+			android:gravity="center"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true" android:textSize="22sp" android:id="@+id/pagenumber" android:text="0/0">
+		</TextView>
+	</RelativeLayout>
+	<ImageView
+		android:layout_width="wrap_content"
+		android:src="@drawable/line"
+		android:id="@+id/line2"
+		android:layout_height="fill_parent"
+		android:layout_alignTop="@+id/prepage"
+		android:layout_alignBottom="@+id/prepage"
+		android:layout_toRightOf="@+id/pages" />
+
+	<RelativeLayout
+		android:layout_width="80dip"
+		android:background="@drawable/tab_one_normal"
+		android:id="@+id/nextpage"
+		android:layout_height="wrap_content"
+		android:layout_alignTop="@+id/prepage"
+		android:layout_alignBottom="@+id/prepage"
+		android:layout_toRightOf="@+id/line2">
+		<ImageView
+			android:layout_alignParentTop="true"
+			android:id="@+id/more"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/btn_browser_forward"
+			android:layout_centerHorizontal="true">
+		</ImageView>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textSize="12sp"
+			android:layout_below="@+id/more"
+			android:layout_centerHorizontal="true" android:text="@string/foottopic2"/>
+	</RelativeLayout>
+</RelativeLayout>
+

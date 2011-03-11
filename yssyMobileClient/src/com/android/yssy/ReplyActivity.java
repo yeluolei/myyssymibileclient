@@ -1,58 +1,85 @@
-package com.android.yssy;
-
+package com.bbs.yssy;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.android.paraser.ReplyParser;
-import com.android.utli.Net;
+import com.bbs.util.Net;
 
 public class ReplyActivity extends Activity {
 
-	EditText replyContentEditText;
-	EditText replyTitleEditText;
-	Button submitButton;
-	Button cancelButton;
-	
-	String urlSource = "http://bbs.sjtu.edu.cn/bbswappst?board=love&file=M.1297309753.A";
-	
+	private EditText replyContentEditText;
+	private EditText replyTitleEditText;
+	private Button submitButton;
+	private Button cancelButton;
+	private AlertDialog dialog;
+
+	private String title;
+	private String board;
+	private String file;
+	private String reidstr;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.reply);
-		
+
 		replyTitleEditText = (EditText)findViewById(R.id.replaytitle);
 		replyContentEditText = (EditText)findViewById(R.id.replycontent);
 		submitButton = (Button) findViewById(R.id.replysubmit);
-		
+		cancelButton = (Button) findViewById(R.id.replycancel);
+
+		Bundle bundle = getIntent().getExtras();
+		title = bundle.getString("title");
+		board = bundle.getString("board");
+		reidstr = bundle.getString("reidstr");
+		file = bundle.getString("file");
+
+		replyTitleEditText.setText(title);
 		submitButton.setOnClickListener(submitListener);
-		
-		try {
-			String source = Net.getInstance().get(urlSource);
-			ReplyParser parser = new ReplyParser(source);
-			String temp = parser.GetTitle();
-			replyTitleEditText.setText(temp);
-			replyContentEditText.setText(parser.GetContent());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		cancelButton.setOnClickListener(cancelClickListener);
 	}
-	
+
+	private Button.OnClickListener cancelClickListener = new Button.OnClickListener() 
+	{
+		@Override
+		public void onClick(View v) {
+			ReplyActivity.this.finish();
+		}
+	};
+
 	private Button.OnClickListener submitListener = new Button.OnClickListener() {
 		public void onClick(View v) {
+			View view = LayoutInflater.from(ReplyActivity.this).inflate(R.layout.progress_dialog,null);
+			dialog = new AlertDialog.Builder(ReplyActivity.this).setView(view).create();
+			dialog.show();
+			DoPost doPost = new DoPost();
+			doPost.execute();
+		}
+	};
 
-			String board = GetUrlParams("board");
-			String file = GetUrlParams("file");
-			String reidstr = file.substring(2, file.length()-2);
-			
+	private class DoPost extends AsyncTask<Void,Integer,Void>
+	{
+		@Override
+		protected Void doInBackground(Void... arg0) {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add( new BasicNameValuePair("title",replyTitleEditText.getText().toString()));
 			params.add( new BasicNameValuePair("text",replyContentEditText.getText().toString()));
@@ -71,23 +98,15 @@ public class ReplyActivity extends Activity {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//			params.add( new BasicNameValuePair("content",replyContent.getText().toString()));
-			//ReplyActivity.this.finish();
+			return null;
 		}
-	};
-	
-	private String GetUrlParams(String name){
-		int headpos = 0;
-		int tailpos = 0;
-		String result;
-		tailpos = urlSource.indexOf("?",tailpos);
-		tailpos = urlSource.indexOf(name + "=",tailpos);
-		headpos = tailpos + name.length() + 1;
-		if( (tailpos = urlSource.indexOf("&",headpos)) == -1){
-			result = urlSource.substring(headpos);
+
+		@Override
+		protected void onPostExecute(Void result) {
+			dialog.dismiss();
+			Toast.makeText(getApplicationContext(),"发表成功",Toast.LENGTH_SHORT).show();
+			super.onPostExecute(result);
+			ReplyActivity.this.finish();
 		}
-		else
-			result = urlSource.substring(headpos,tailpos);
-		return result;
 	}
 }

@@ -1,11 +1,17 @@
-package com.android.paraser;
-
+package com.bbs.paraser;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.android.utli.Net;
+import com.bbs.util.Net;
 
 
 /*
