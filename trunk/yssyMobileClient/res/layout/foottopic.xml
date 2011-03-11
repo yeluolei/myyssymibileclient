@@ -80,13 +80,11 @@
 				android:layout_alignParentTop="true"
 				android:id="@+id/mode"
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/mode_button"></ImageView>
+				android:layout_height="wrap_content" android:src="@drawable/mode"></ImageView>
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center"
-				android:layout_gravity="center"
 				android:textSize="12sp"
 				android:layout_below="@+id/mode" android:text="@string/foottopic3"/>
 		</RelativeLayout>
@@ -115,7 +113,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:gravity="center"
-			android:layout_gravity="center"
 			android:textSize="12sp" android:layout_below="@+id/more" android:text="@string/foottopic4"/>
 			</RelativeLayout>
 	</LinearLayout>

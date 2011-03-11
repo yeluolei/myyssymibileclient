@@ -1,4 +1,11 @@
-package com.android.paraser;
+package com.bbs.paraser;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 
 public class ReplyParser {
 	String content;
@@ -17,7 +24,6 @@ public class ReplyParser {
 			tailpos = content.indexOf("=",tailpos);
 			headpos = tailpos;
 			tailpos = content.indexOf(" ",tailpos+2);
-			String temp = content.substring(headpos + 2, tailpos - 1);
 			if(cnt == 4){
 				tailpos = content.indexOf("value",tailpos);
 				tailpos = content.indexOf("=",tailpos);

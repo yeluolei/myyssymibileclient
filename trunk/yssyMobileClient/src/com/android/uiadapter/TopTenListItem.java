@@ -1,5 +1,11 @@
-package com.android.uiadapter;
-
+package com.bbs.uiadapter;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 import java.util.Map;
 
 import android.content.Context;
@@ -8,7 +14,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.yssy.R;
+import com.bbs.yssy.R;
 
 public class TopTenListItem extends LinearLayout{
 	Context context ;

@@ -1,5 +1,11 @@
-package com.android.uiadapter;
-
+package com.bbs.uiadapter;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +24,17 @@ public class TopTenListAdapter extends BaseAdapter{
 		this.datas = dataList;
 	}
 
+	public void clear() 
+	{
+		datas.clear();
+	}
+	
 	@Override
 	public int getCount() {
+		if (datas == null) 
+		{
+			return 0;
+		}
 		return datas.size();
 	}
 

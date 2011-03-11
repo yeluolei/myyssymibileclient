@@ -17,7 +17,8 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@+id/head"
-		android:drawingCacheQuality="high" android:visibility="gone">
+		android:drawingCacheQuality="high"
+		android:visibility="gone">
 		<TextView
 			android:id="@+id/selectboard"
 			android:layout_width="wrap_content"
@@ -26,18 +27,34 @@
 			android:layout_marginLeft="5dip"
 			android:layout_marginTop="5dip"
 			android:gravity="center"
-			android:textColor="@color/topictitle" android:layout_alignParentTop="true" android:text="@string/selectborad"></TextView>
-	<AutoCompleteTextView android:background="@drawable/bg_input_panel" android:dropDownVerticalOffset="5dip" android:singleLine="true" android:layout_height="wrap_content" android:textColor="@color/topictitle" android:id="@+id/boads" android:layout_marginLeft="5dip" android:dropDownWidth="fill_parent" android:dropDownSelector="@drawable/list_select" android:layout_marginTop="5dip" android:layout_marginRight="5dip" android:hint="@string/inputhint" android:layout_below="@+id/selectboard" android:layout_alignLeft="@+id/selectboard" android:layout_width="wrap_content"></AutoCompleteTextView>
+			android:textColor="@color/topictitle"
+			android:layout_alignParentTop="true"
+			android:text="@string/selectborad"></TextView>
+		<AutoCompleteTextView
+			android:background="@drawable/bg_input_panel"
+			android:dropDownVerticalOffset="5dip"
+			android:singleLine="true"
+			android:layout_height="wrap_content"
+			android:textColor="@color/topictitle"
+			android:id="@+id/boads"
+			android:layout_marginLeft="5dip"
+			android:dropDownWidth="fill_parent"
+			android:dropDownSelector="@drawable/list_select"
+			android:layout_marginTop="5dip"
+			android:layout_marginRight="5dip"
+			android:hint="@string/inputhint"
+			android:layout_below="@+id/selectboard"
+			android:layout_alignLeft="@+id/selectboard"
+			android:layout_width="wrap_content" android:imeOptions="actionDone"></AutoCompleteTextView>
 		<Button
 			android:id="@+id/gotoboard"
 			android:text="Go"
 			android:layout_height="35dip"
-			android:background="@drawable/buttonbackground"
 			android:layout_marginRight="5dip"
 			android:layout_toRightOf="@+id/boads"
 			android:layout_alignTop="@+id/boads"
 			android:layout_alignBottom="@+id/boads"
-			android:layout_width="60dip"></Button>
+			android:layout_width="60dip" android:background="@drawable/buttonbackground"></Button>
 	</RelativeLayout>
 	<RelativeLayout
 		android:layout_width="wrap_content"

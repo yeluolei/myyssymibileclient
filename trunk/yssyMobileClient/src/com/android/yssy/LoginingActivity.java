@@ -1,8 +1,11 @@
-package com.android.yssy;
-
-import com.android.utli.Login;
-import com.android.utli.utli;
-
+package com.bbs.yssy;
+/**
+ * 
+ * @author SJTU SE Ye Rurui ; Zhu Xinyu ; Peng Jianxiang
+ * email:yeluolei@gmail.com zxykobezxy@gmail.com
+ * No Business Use is Allowed
+ * 2011-2-14
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +14,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bbs.util.Login;
+import com.bbs.util.Net;
+import com.bbs.util.Utli;
 
 public class LoginingActivity extends Activity {
 	private final int LOGIN_SUCESS = 0x001;
@@ -38,18 +45,24 @@ public class LoginingActivity extends Activity {
 		@Override
 		public void run() {
 			try{
-				Login login = new Login();
-				boolean sucess = login.login(utli.userName,
-						utli.password);
-				if (sucess == true)
+				if (!Net.getInstance().checknetwork(getApplicationContext())) 
 				{
-					Message message  = new Message();
-					message.what = LOGIN_SUCESS;
-					LoginingActivity.this.loginHandler.sendMessage(message);
+					throw new Exception("登入失败,请检查网络连接");
 				}
-				else 
-				{
-					throw new Exception("用户名或密码错误！");
+				else {
+					Login login = new Login();
+					boolean sucess = login.login(Utli.userName,
+							Utli.password);
+					if (sucess == true)
+					{
+						Message message  = new Message();
+						message.what = LOGIN_SUCESS;
+						LoginingActivity.this.loginHandler.sendMessage(message);
+					}
+					else 
+					{
+						throw new Exception("用户名或密码错误！");
+					}
 				}
 			}catch (Exception e) {
 				Bundle bundle = new Bundle();
@@ -73,15 +86,15 @@ public class LoginingActivity extends Activity {
 			{
 				SharedPreferences dataSharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
 				SharedPreferences.Editor editor = dataSharedPreferences.edit();
-				editor.putString("username", utli.userName);
-				if (utli.remember) {
-					editor.putString("password", utli.password);
+				editor.putString("username", Utli.userName);
+				if (Utli.remember) {
+					editor.putString("password", Utli.password);
 				}
 				else {
 					editor.putString("password", null);
 				}
-				editor.putBoolean("remember", utli.remember);
-				editor.putBoolean("auto", utli.auto);
+				editor.putBoolean("remember", Utli.remember);
+				editor.putBoolean("auto", Utli.auto);
 				editor.commit();
 				Intent intent = new Intent(LoginingActivity.this,TopTenActivity.class);
 				startActivity(intent);
@@ -90,7 +103,7 @@ public class LoginingActivity extends Activity {
 			}
 			case LOGIN_FAILED:
 			{
-				Toast.makeText(getApplicationContext(),msg.getData().getShort("exception"), Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(),msg.getData().getString("exception"), Toast.LENGTH_SHORT).show();
 				Intent intent= new Intent(LoginingActivity.this,LoginActivity.class);
 				startActivity(intent);
 				LoginingActivity.this.finish();
